@@ -57,7 +57,6 @@ class Program {
 ## ⚙️ AppUpdater (Executável)
 
 - Responsável por baixar, extrair e aplicar as atualizações.  
-- Pode rodar **silenciosamente** ou com interface de notificação.  
 - Sempre funciona em conjunto com a `UpdaterLib`.  
 
 ---
