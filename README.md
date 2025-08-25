@@ -9,8 +9,8 @@ Este projeto é **Open Source (MIT)** e inclui:
 
 ⚠️ **Atenção:**
 Baixe os arquivos na aba [Releases](https://github.com/CaiqueZ/AppUpdater/releases):
-- [release.zip](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/release.zip) → Contém o **SampleApp**
-- [AppUpdater.exe](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/AppUpdater.exe) → Executável do atualizador
+- [release.zip](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/release.zip) → Contém o **SampleApp** `Baixe direto`
+- [AppUpdater.exe](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/AppUpdater.exe) → Executável do atualizador `Baixe direto`
 
 ---
 
