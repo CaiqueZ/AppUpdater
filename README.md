@@ -8,9 +8,10 @@ Este projeto é **Open Source (MIT)** e inclui:
 - 🧪 **SampleApp** → Exemplo funcional que demonstra como usar a biblioteca.
 
 ⚠️ **Atenção:**
-Baixe os arquivos na aba [Releases](https://github.com/CaiqueZ/AppUpdater/releases), ou `Baixe direto` abaixo:
+Baixe os arquivos da **versão 1.0.0** na aba [Releases](https://github.com/CaiqueZ/AppUpdater/releases), ou `Baixe direto` abaixo:
 - [release.zip](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/release.zip) → Contém o **SampleApp**
 - [AppUpdater.exe](https://github.com/CaiqueZ/AppUpdater/releases/download/1.0.0/AppUpdater.exe) → Executável do atualizador
+- **Para testar o funcionamento do programa, busque pela release 1.0.0**
 
 ---
 
