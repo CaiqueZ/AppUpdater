@@ -26,11 +26,8 @@ AppUpdater/
 1. **O programa inicia** → Usa a `UpdaterLib` para verificar a versão mais recente online.  
 2. **Se houver update** → Chama o `AppUpdater.exe`.  
 3. O AppUpdater baixa a nova versão e:  
-   - Se o programa estiver **fechado** → já substitui os arquivos e inicia atualizado.  
-   - Se o programa estiver **aberto** → baixa e guarda em cache, aguardando o fechamento para aplicar.  
-4. O usuário pode receber uma **notificação** com as opções:  
-   - ✅ Atualizar agora (fecha e substitui)  
-   - ❌ Cancelar (aguarda o fechamento normal do app)
+   - Se o programa estiver **fechado** → já substitui os arquivos e inicia atualizado.
+   - Se o programa estiver **aberto** → baixa e guarda em cache, aguardando o fechamento para aplicar.
 
 ---
 
