@@ -13,7 +13,7 @@ namespace SampleApp
             // Verifica se existe atualização
             if (await UpdaterClient.HasUpdate())
             {
-                Console.WriteLine("⚠️ Nova versão disponível!");
+                Console.WriteLine("<!> Nova versão disponível!");
                 Console.WriteLine("Chamando AppUpdater...");
 
                 // Executa o AppUpdater
@@ -24,7 +24,7 @@ namespace SampleApp
             }
             else
             {
-                Console.WriteLine("✅ Você já está na versão mais recente!");
+                Console.WriteLine("> Você já está na versão mais recente!");
             }
 
             Console.WriteLine("Pressione qualquer tecla para sair...");

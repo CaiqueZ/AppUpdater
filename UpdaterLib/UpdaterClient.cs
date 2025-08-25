@@ -48,13 +48,19 @@ namespace UpdaterLib
         {
             try
             {
-                string local = GetLocalVersion();
-                string online = (await GetOnlineVersion()).Trim();
+                string local = GetLocalVersion()?.Trim() ?? "0.0.0.0";
+                string online = (await GetOnlineVersion()) ?? "0.0.0.0";
+
+                // remove BOM e normaliza
+                online = online.Replace("\uFEFF", "").Trim();
+                local = local.Replace("\uFEFF", "").Trim();
+
                 return !local.Equals(online, StringComparison.OrdinalIgnoreCase);
             }
-            catch
+            catch (Exception ex)
             {
-                return false; // sem internet, etc.
+                Console.WriteLine($"[DEBUG] Erro ao verificar update: {ex.Message}");
+                return false;
             }
         }
 

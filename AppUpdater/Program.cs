@@ -13,20 +13,18 @@ namespace AppUpdater
         {
             Console.WriteLine("=== AppUpdater ===");
 
-            // Verifica se foi passada a URL como argumento
             if (args.Length < 1)
             {
                 Console.WriteLine("Uso incorreto!");
                 return;
             }
 
-            // Win7/legacy: força TLS 1.2 para downloads do GitHub
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 
-            string downloadUrl = args[0];                        // URL recebida (arquivo .zip no GitHub)
-            string destinationZip = "release.zip";               // Nome fixo do arquivo baixado
-            string extractPath = AppDomain.CurrentDomain.BaseDirectory; // Pasta atual do programa
-            string mainAppExe = Path.Combine(extractPath, "SampleApp.exe"); // Nome fixo do executável principal
+            string downloadUrl = args[0];
+            string destinationZip = "release.zip";
+            string extractPath = AppDomain.CurrentDomain.BaseDirectory;
+            string mainAppExe = Path.Combine(extractPath, "SampleApp.exe");
 
             try
             {
@@ -34,57 +32,72 @@ namespace AppUpdater
 
                 using (var client = new WebClient())
                 {
-                    // Exibe progresso do download
                     client.DownloadProgressChanged += (s, e) =>
                     {
-                        int totalBlocks = 30; // tamanho fixo da barra
+                        int totalBlocks = 30;
                         int filledBlocks = (int)((e.ProgressPercentage / 100.0) * totalBlocks);
                         string progressBar = new string('█', filledBlocks) + new string('░', totalBlocks - filledBlocks);
 
                         Console.Write($"\r[{progressBar}] {e.ProgressPercentage}%");
                     };
 
-
-                    // Evento de finalização do download
                     client.DownloadFileCompleted += (s, e) =>
                     {
                         Console.WriteLine("\nDownload concluído!");
                     };
 
-                    // Faz o download assíncrono do arquivo ZIP
                     client.DownloadFileAsync(new Uri(downloadUrl), destinationZip);
 
-                    // Espera até terminar
                     while (client.IsBusy)
                         Thread.Sleep(100);
                 }
 
                 Console.WriteLine($"Arquivo salvo em: {destinationZip}");
 
-                // Extrai o conteúdo do ZIP para a pasta da aplicação
                 Console.WriteLine("Extraindo atualização...");
                 using (ZipArchive archive = ZipFile.OpenRead(destinationZip))
                 {
                     foreach (var entry in archive.Entries)
                     {
-                        string filePath = Path.Combine(extractPath, entry.FullName);
+                        try
+                        {
+                            string filePath = Path.Combine(extractPath, entry.FullName);
 
-                        // Protege contra paths inválidos (path traversal)
-                        if (!filePath.StartsWith(extractPath, StringComparison.OrdinalIgnoreCase))
-                            continue;
+                            if (!filePath.StartsWith(extractPath, StringComparison.OrdinalIgnoreCase))
+                                continue;
 
-                        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-                        entry.ExtractToFile(filePath, true); // substitui arquivos existentes
+                            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                            // extrai primeiro para um .tmp
+                            string tempFile = filePath + ".tmp";
+                            entry.ExtractToFile(tempFile, true);
+
+                            if (File.Exists(filePath))
+                            {
+                                // substitui com backup
+                                string backupFile = filePath + ".bak";
+                                File.Replace(tempFile, filePath, backupFile, true);
+                                File.Delete(backupFile);
+                            }
+                            else
+                            {
+                                File.Move(tempFile, filePath);
+                            }
+
+                            Console.WriteLine($"Atualizado: {entry.FullName}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[ERRO] {entry.FullName}: {ex.Message}");
+                        }
                     }
                 }
 
                 Console.WriteLine("> Atualização aplicada com sucesso!");
 
-                // Remove o arquivo temporário
                 File.Delete(destinationZip);
                 Console.WriteLine("Arquivo temporário removido.");
 
-                // Reinicia o aplicativo principal
                 if (File.Exists(mainAppExe))
                 {
                     Console.WriteLine("Reiniciando aplicação...");
