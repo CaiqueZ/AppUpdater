@@ -1,5 +1,5 @@
 # 🔄 AppUpdater
-
+<details>
 **AppUpdater** é um sistema **universal de atualização automática** para aplicações em **.NET Framework (4.6.1+)**, compatível até com o **Windows 7**.
 Este projeto é **Open Source (MIT)** e inclui:
 
@@ -114,3 +114,124 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 ## 📌 Créditos
 
 Desenvolvido por **Caique Z** • [GitHub](https://github.com/CaiqueZ)
+</details>
+<details> <summary>🇺🇸 English</summary>
+
+AppUpdater is a universal auto-update system for applications in .NET Framework (4.6.1+), compatible even with Windows 7.
+This project is Open Source (MIT) and includes:
+
+📚 UpdaterLib → C# library for integration with any application.
+
+⚙️ AppUpdater.exe → Executable responsible for applying updates.
+
+🧪 SampleApp → Functional example demonstrating how to use the library.
+
+⚠️ Note:
+Download the files of version 1.0.0 in the Releases
+ tab, or Download directly below:
+
+release.zip
+ → Contains the SampleApp
+
+AppUpdater.exe
+ → Updater executable
+
+To test the program, use release 1.0.0
+
+📂 Project Structure
+AppUpdater/
+ ├── UpdaterLib/    → Update library (DLL)
+ ├── AppUpdater/    → Updater (EXE)
+ ├── SampleApp/     → Example application using UpdaterLib
+ └── README.md      → This file
+
+🚀 Update flow
+
+Program starts → Uses UpdaterLib to check the latest version online.
+
+If there is an update → Calls AppUpdater.exe.
+
+The AppUpdater downloads the new version and:
+
+If the program is closed → replaces files and starts updated.
+
+If the program is open → downloads and caches, waiting for closure to apply.
+
+📚 UpdaterLib (Library)
+
+Provides methods to check online/local versions.
+
+Downloads required files for update.
+
+Can be easily integrated into any application.
+
+Example usage in your program:
+
+using UpdaterLib;
+
+class Program {
+    static void Main() {
+        var updater = new Updater("https://mysite.com/version.txt", "MyApp.exe");
+
+        if (updater.HasUpdate()) {
+            updater.RunUpdater(); // calls AppUpdater.exe
+        }
+    }
+}
+
+⚙️ AppUpdater (Executable)
+
+Responsible for downloading, extracting, and applying updates.
+
+Always works together with UpdaterLib.
+
+🧪 SampleApp (Example)
+
+Simple console application demonstrating integration with UpdaterLib.
+
+Shows in practice how to check for updates and call AppUpdater.
+
+🔧 How to build
+
+Clone this repository:
+
+git clone https://github.com/CaiqueZ/AppUpdater.git
+
+
+Open the solution in Visual Studio 2019+.
+
+Build the solution → it will generate:
+
+UpdaterLib.dll
+
+AppUpdater.exe
+
+SampleApp.exe
+
+📦 How to use in your project
+
+Copy UpdaterLib.dll and AppUpdater.exe to your program folder.
+
+In Visual Studio, add a reference to UpdaterLib.dll.
+
+Use the library API to integrate the update system.
+
+🛡️ License
+
+This project is licensed under the MIT License → you can freely use it in personal or commercial projects.
+See the LICENSE
+ file for more details.
+
+🤝 Contributing
+
+Pull requests are welcome!
+
+Open an issue if you have questions, suggestions, or found bugs.
+
+Give a ⭐ to support this project!
+
+📌 Credits
+
+Developed by Caique Z • GitHub
+
+</details> ```
