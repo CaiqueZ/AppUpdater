@@ -1,4 +1,5 @@
 # 🔄 AppUpdater
+📖 *Projeto para Estudos*
 
 **AppUpdater** é um sistema **universal de atualização automática** para aplicações em **.NET Framework (4.6.1+)**, compatível até com o **Windows 7**.
 Este projeto é **Open Source (MIT)** e inclui:
